@@ -1,0 +1,41 @@
+# Build output (ProCMP / darklua)
+generated/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Machine-local toolchain and pipeline config
+.aftman/
+pipeline/.pcmp.local.json
+
+# Node (debug hot-reload server)
+node_modules/
+
+# Roblox / Luau ecosystem
+sourcemap.json
+_Index/
+DevPackages/
+
+# Python / MkDocs (see docs/contributing.md)
+site/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and scratch files
+*.log
+*.tmp
