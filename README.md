@@ -21,15 +21,12 @@ local function ImportTopBarPlus(Ref: string?)
 	return loadstring(game:HttpGetAsync(Url), File)()
 end
 
-local TopBarPlus = ImportTopBarPlus()
--- local TopBarPlus = ImportTopBarPlus("v1.0.0")
+local PearlTopBar = ImportTopBarPlus()
+-- local PearlTopBar = ImportTopBarPlus("v1.0.0")
 ```
 
 Or as a one-liner:
 
 ```luau
-local TopBarPlus = loadstring(
-	game:HttpGetAsync("https://raw.githubusercontent.com/Pearl-Softworks/TopBarPlus/main/TopBarPlus.luau"),
-	"TopBarPlus"
-)()
+local PearlTopBar = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Pearl-Softworks/TopBarPlus/main/TopBarPlus.luau"), "TopBarPlus")()
 ```
