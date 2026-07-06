@@ -10,7 +10,7 @@ A patched TopbarPlus for executors. Construct dynamic and intuitive topbar icons
 
 ### Dynamic fetching over HTTP
 
-> This uses `loadstring` and `HttpGetAsync`. Pin a branch or tag in production (e.g. `main`, `v1.0.0`).
+> Uses `loadstring` and `HttpGetAsync` against the bundled [`TopBarPlus.luau`](./TopBarPlus.luau) on `main`. Pin a branch or tag in production.
 
 ```luau
 local Repo = "Pearl-Softworks/TopBarPlus"
@@ -28,5 +28,14 @@ local PearlTopBar = ImportTopBarPlus()
 Or as a one-liner:
 
 ```luau
-local PearlTopBar = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Pearl-Softworks/TopBarPlus/main/TopBarPlus.luau"), "TopBarPlus")()
+local PearlTopBar = loadstring(
+	game:HttpGetAsync("https://raw.githubusercontent.com/Pearl-Softworks/TopBarPlus/main/TopBarPlus.luau"),
+	"TopBarPlus"
+)()
+```
+
+Rebuild the bundle after changing `src/`:
+
+```sh
+node scripts/bundle.mjs
 ```
