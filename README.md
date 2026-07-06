@@ -12,32 +12,16 @@ A patched TopbarPlus for executors. Construct dynamic and intuitive topbar icons
 
 There are two main ways to use TopbarPlusPlus
 
-### Downloading a build
-
-You can get a build from our releases page.
-
-[View the latest release](https://github.com/biggaboy212/TopbarPlusPlus/releases/latest)
-
 ### Dynamic fetching over HTTP
 
 > This will use `loadstring` and `HttpGetAsync`.
 
 ```luau
-local function importRelease(owner, repo, version, file)
-    local tag = (version == "latest" and "latest/download" or "download/"..version)
+local function ImportRelease(Owner, Repository, Version, File)
+    local Tag = (version == "latest" and "latest/download" or "download/"..version)
 
-    return loadstring(game:HttpGetAsync(("https://github.com/%s/%s/releases/%s/%s"):format(owner, repo, tag, file)), file)()
+    return loadstring(game:HttpGetAsync(("https://github.com/%s/%s/releases/%s/%s"):format(Owner, Repository, Tag, File)), File)()
 end
 
-local topbarPP = importRelease("biggaboy212", "TopbarPlusPlus", "latest", "topbarPP.luau")
+local PearlTopBar = ImportRelease("biggaboy212", "TopbarPlusPlus", "latest", "topbarPP.luau")
 ```
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=biggaboy212%2FTopbarPlusPlus&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=biggaboy212/TopbarPlusPlus&type=date&theme=dark&logscale&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=biggaboy212/TopbarPlusPlus&type=date&logscale&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=biggaboy212/TopbarPlusPlus&type=date&logscale&legend=top-left" />
- </picture>
-</a>
