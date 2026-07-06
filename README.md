@@ -8,18 +8,28 @@ A patched TopbarPlus for executors. Construct dynamic and intuitive topbar icons
 
 ## Installation & Usage
 
-There are two main ways to use TopbarPlusPlus
-
 ### Dynamic fetching over HTTP
 
-> This will use `loadstring` and `HttpGetAsync`.
+> This uses `loadstring` and `HttpGetAsync`. Pin a branch or tag in production (e.g. `main`, `v1.0.0`).
 
 ```luau
-local function ImportRelease(Owner, Repository, Version, File)
-    local Tag = (version == "latest" and "latest/download" or "download/"..version)
+local Repo = "Pearl-Softworks/TopBarPlus"
+local File = "TopBarPlus.luau"
 
-    return loadstring(game:HttpGetAsync(("https://github.com/%s/%s/releases/%s/%s"):format(Owner, Repository, Tag, File)), File)()
+local function ImportTopBarPlus(Ref: string?)
+	local Url = ("https://raw.githubusercontent.com/%s/%s/%s"):format(Repo, Ref or "main", File)
+	return loadstring(game:HttpGetAsync(Url), File)()
 end
 
-local PearlTopBar = ImportRelease("biggaboy212", "TopbarPlusPlus", "latest", "topbarPP.luau")
+local TopBarPlus = ImportTopBarPlus()
+-- local TopBarPlus = ImportTopBarPlus("v1.0.0")
+```
+
+Or as a one-liner:
+
+```luau
+local TopBarPlus = loadstring(
+	game:HttpGetAsync("https://raw.githubusercontent.com/Pearl-Softworks/TopBarPlus/main/TopBarPlus.luau"),
+	"TopBarPlus"
+)()
 ```
