@@ -21,8 +21,8 @@ local function ImportTopBarPlus(Ref: string?)
 	return loadstring(game:HttpGetAsync(Url), File)()
 end
 
-local PearlTopBar = ImportTopBarPlus()
--- local PearlTopBar = ImportTopBarPlus("v1.0.0")
+local Icon = ImportTopBarPlus()
+-- local Icon = ImportTopBarPlus("v1.0.0")
 ```
 
 Or as a one-liner:
