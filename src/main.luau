@@ -114,6 +114,18 @@ function Icon.getIcon(nameOrUID)
 	return nil
 end
 
+function Icon.removeAll()
+	local iconsToDestroy = {}
+	for _, icon in pairs(iconsDict) do
+		if not icon.isAnOverflow and not icon.isRemoveAllOption then
+			table.insert(iconsToDestroy, icon)
+		end
+	end
+	for _, icon in ipairs(iconsToDestroy) do
+		icon:destroy()
+	end
+end
+
 function Icon.setTopbarEnabled(bool, isInternal)
 	if typeof(bool) ~= "boolean" then
 		bool = Icon.topbarEnabled

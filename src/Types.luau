@@ -42,6 +42,13 @@ type StaticFunctions = {
 			return nil :: any
 		end
 	),
+	removeAll: typeof(
+		--[[
+			Destroys every user-created icon. Overflow and RemoveAll menu options are kept.
+		]]
+		function()
+		end
+	),
 	setTopbarEnabled: typeof(
 		--[[
 			When set to <code>false</code> all TopbarPlus ScreenGuis are hidden.

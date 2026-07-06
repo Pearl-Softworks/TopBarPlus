@@ -14,6 +14,20 @@ local overflowIcons = {}
 local overflowIconUIDs = {}
 local Icon
 
+local function createRemoveAllOption(overflowIcon)
+	local removeAllIcon = Icon.new()
+	removeAllIcon:setLabel("RemoveAll")
+	removeAllIcon:setName("RemoveAll")
+	removeAllIcon.isRemoveAllOption = true
+	removeAllIcon:autoDeselect(false)
+	removeAllIcon:oneClick(true)
+	removeAllIcon:bindEvent("selected", function()
+		Icon.removeAll()
+	end)
+	removeAllIcon:joinMenu(overflowIcon)
+	return removeAllIcon
+end
+
 --// Private Methods
 local function findHoldersInGui(guiContainer)
 	local holders = {}
@@ -206,7 +220,7 @@ function Overflow.updateAvailableIcons(alignment)
 		local parentUID = icon.parentIconUID
 		local isDirectlyOnTopbar = not parentUID or overflowIconUIDs[parentUID]
 		local isOverflow = overflowIconUIDs[icon.UID]
-		if isDirectlyOnTopbar and icon.alignment == alignment and not isOverflow and icon.isEnabled then
+		if isDirectlyOnTopbar and icon.alignment == alignment and not isOverflow and not icon.isRemoveAllOption and icon.isEnabled then
 			table.insert(ourOrderedIcons, icon)
 			ourTotal += 1
 		end
@@ -320,6 +334,11 @@ function Overflow.updateBoundary(alignment)
 		overflowIcon:setEnabled(false)
 		overflowIcons[alignment] = overflowIcon
 		overflowIconUIDs[overflowIcon.UID] = true
+
+		if not overflowIcon.removeAllOptionCreated then
+			overflowIcon.removeAllOptionCreated = true
+			createRemoveAllOption(overflowIcon)
+		end
 		 
 		if not Icon.closeableOverflowMenus then
 			local iconSpot = overflowIcon:getInstance("IconSpot")
@@ -496,8 +515,8 @@ function Overflow.updateBoundary(alignment)
 		end
 	end
 
-	if overflowIcon.isEnabled ~= joinOverflow then
-		overflowIcon:setEnabled(joinOverflow)
+	if overflowIcon.isEnabled ~= (joinOverflow or ourTotal > 0) then
+		overflowIcon:setEnabled(joinOverflow or ourTotal > 0)
 	end
 
 	if overflowIcon.isEnabled and not overflowIcon.overflowAlreadyOpened then
